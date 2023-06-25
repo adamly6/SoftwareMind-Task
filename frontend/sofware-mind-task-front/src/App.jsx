@@ -375,7 +375,7 @@ function App() {
         </button>
       )}
 
-      {currentPage !== totalPages - 1 && (
+      {currentPage !== totalPages - 1 && tasks.length !== 0 && (
         <button
           type="button"
           onClick={() => setCurrentPage((prev) => prev + 1)}
