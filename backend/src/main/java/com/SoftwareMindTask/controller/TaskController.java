@@ -5,13 +5,12 @@ import com.SoftwareMindTask.entity.Type;
 import com.SoftwareMindTask.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.List;
+
 
 
 @RestController
@@ -20,8 +19,7 @@ import java.util.List;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    @Autowired
-    private TaskService taskService;
+    private final TaskService taskService;
     @GetMapping
     public Page<Task> searchTasks(
             @RequestParam(value = "type", required = false) Type type,
@@ -49,9 +47,9 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public Void deleteTask(@PathVariable("id") Long id) {
+    public void deleteTask(@PathVariable("id") Long id) {
 
-        return taskService.deleteTask(id);
+        taskService.deleteTask(id);
     }
 
 }

@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -61,12 +60,10 @@ public class TaskService {
         return updatedTask;
     }
 
-    public Void deleteTask(Long id) {
+    public void deleteTask(Long id) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
 
         taskRepository.delete(task);
-
-        return null;
     }
 }
