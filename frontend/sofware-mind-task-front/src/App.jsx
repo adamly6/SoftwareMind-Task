@@ -55,7 +55,12 @@ function App() {
         description: newDesc,
       }),
     });
-    await getTasks();
+    await getTasks({
+      [filter]: searchValue,
+      sort: `${column},${order}`,
+      page: currentPage,
+      size: 10,
+    });
   };
 
   const handleTitleChange = (event) => {
@@ -105,7 +110,12 @@ function App() {
   const deleteTask = async (id) => {
     try {
       await fetch(`http://localhost:8080/tasks/${id}`, { method: "DELETE" });
-      await getTasks();
+      await getTasks({
+        [filter]: searchValue,
+        sort: `${column},${order}`,
+        page: currentPage,
+        size: 10,
+      });
     } catch (error) {
       console.error(error);
     }
