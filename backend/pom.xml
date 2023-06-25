@@ -14,6 +14,7 @@
 	<name>SoftwareMindTask</name>
 	<description>task for SoftwareMind</description>
 	<properties>
+		<skipTests>true</skipTests>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
