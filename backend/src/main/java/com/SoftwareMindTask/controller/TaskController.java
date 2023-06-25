@@ -6,6 +6,7 @@ import com.SoftwareMindTask.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
     @GetMapping
-    public List<Task> searchTasks(
+    public Page<Task> searchTasks(
             @RequestParam(value = "type", required = false) Type type,
             Pageable sort,
             @RequestParam(value = "title", required = false) String title) {

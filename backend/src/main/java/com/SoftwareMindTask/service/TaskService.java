@@ -4,6 +4,7 @@ import com.SoftwareMindTask.entity.Task;
 import com.SoftwareMindTask.entity.Type;
 import com.SoftwareMindTask.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,9 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
-    public List<Task> searchTasks(Type type, Pageable sort, String title) {
+    public Page<Task> searchTasks(Type type, Pageable sort, String title) {
 
-        List<Task> tasks;
+        Page<Task> tasks;
 
         if (type != null && title != null) {
             tasks = taskRepository.findByTypeAndTitleContainingIgnoreCase(type, title, sort);
@@ -28,7 +29,7 @@ public class TaskService {
         } else if (title != null) {
             tasks = taskRepository.findByTitleContainingIgnoreCase(title, sort);
         } else {
-            tasks = taskRepository.findAll(sort).getContent();
+            tasks = taskRepository.findAll(sort);
         }
 
         return tasks;
